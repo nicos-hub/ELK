@@ -3,7 +3,7 @@
 These Python scripts let you interact with an Elasticsearch instance  
 
 ## Prerequisites
-Scripts use python package elastichsearch, it can be installed with  
+Scripts use python package elasticsearch, it can be installed with  
 ```
 $ python -m pip install elasticsearch
 ```
