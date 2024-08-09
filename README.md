@@ -1,5 +1,13 @@
 # ELK
 
+These Python scripts let you interact with an Elasticsearch instance  
+
+## Prerequisites
+Scripts use python package elastichsearch, it can be installed with  
+```
+$ python -m pip install elasticsearch
+```
+
 ## Connection
 ### ElasticConnectionUser.py
 Establish a connection to Elasticsearch using username and password  
