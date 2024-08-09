@@ -4,16 +4,16 @@
 ### ElasticConnectionUser.py
 Establish a connection to Elasticsearch using username and password  
 Settings needed:  
-* line 25 configure Elastic HOST and PORT  
-* line 26 configure path to Elastic certificate  
-* line 27 configure Elastic USER and PASSWORD  
+* line 25: Elastic HOST and PORT  
+* line 26: path to Elastic certificate  
+* line 27: Elastic USER and PASSWORD  
 
 ### ElasticConnectionAPI.py
 Establish a connection to Elasticsearch using API key  
 Settings needed:  
-* line 26 configure Elastic HOST and PORT  
-* line 27 configure Elastic API key  
-* line 28 configure path to Elastic certificate  
+* line 26: Elastic HOST and PORT  
+* line 27: Elastic API key  
+* line 28: path to Elastic certificate  
 
 API KEY can be generate fron Kibana Dev Tools by sending the following request (Set your own API_NAME and INDEX_NAME):  
 ```
