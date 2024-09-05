@@ -42,3 +42,22 @@ POST /_security/api_key
 }
 }
 ```
+
+## Index creation
+### ElasticCreateIndex.py
+Create an index called "index-test", using API key for Elasticsearch connection.
+You can modify the function connect_to_elasticsearch() to use the one with username and password.
+Be Careful, n both case API or user need privileges to create index.
+
+In this example, index mapping is composed by 4 properties :
+```
+"@timestamp": { "type": "date" },
+"text_field": {"type": "text"},
+"long_field1": {"type": "long"},
+"long_field2": {"type": "long"}
+```
+
+Settings needed:  
+* line 41: Elastic HOST and PORT  
+* line 42: Elastic API key  
+* line 43: path to Elastic certificate  

@@ -1,13 +1,13 @@
 ################################################################################
-# Script name: ElasticConnectionAPI.py
+# Script name: ElasticCreateIndex.py
 # Author: Nicolas Dolisy
-# Date: 2024/05/06
-# Input or configuration :  line 26 configure Elastic HOST and PORT
-#                           line 27 configure Elastic API key
-#                           line 28 configure path to Elastic certificate
-# Output: Cluster's info displayed in terminal
+# Date: 2024/05/13
+# Input or configuration :  line 41 configure Elastic host and port
+#                           line 42 configure Elastic API key
+#                           line 43 configure path to Elastic certificate
+# Output: Create index in elastic and display index mapping on screen
 # Version: 1.0
-# Comment: Establish a connection to Elasticsearch using API key
+# Comment: 
 # Release notes:
 ################################################################################
 
@@ -17,6 +17,21 @@ import logging
 # Logging configuration
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# Index name
+index_name = 'index-test'
+
+# Index mapping
+mapping = {
+    "mappings": {
+        "properties": {
+            "@timestamp": { "type": "date" },
+            "text_field": {"type": "text"},
+            "long_field1": {"type": "long"},
+            "long_field2": {"type": "long"}
+        }
+    }
+}
 
 # Function to establish a connection to Elasticsearch using API
 def connect_to_elasticsearch():
@@ -38,19 +53,17 @@ def connect_to_elasticsearch():
     except Exception as err:
         logger.error(f" Error during Elasticsearch connection: {err}")
         return None
-     
-# Funtion to get and print cluster's information
-def get_cluster_info(es_connection):
-    if es_connection:
-        try:
-            info = es_connection.info()
-            logger.info(f" Cluster's name: {info['cluster_name']}")
-            logger.info(f" Elasticsearch version: {info['version']['number']}")
-        except Exception as err:
-            logger.error(f" Error getting Elasticsearch information: {err}")
 
 # Connection to Elasticsearch
 es_connection = connect_to_elasticsearch()
-# If connected get cluster information
+# If connected create index
 if es_connection:
-    get_cluster_info(es_connection)
+    if not es_connection.indices.exists(index=index_name):
+        es_connection.indices.create(index=index_name, body=mapping)
+        print(f"Index '{index_name}' creation successful")
+    else:
+        print(f"Index '{index_name}' already exists")
+
+# Mapping check
+index_mapping = es_connection.indices.get_mapping(index=index_name)
+print("Index mapping :", index_mapping)
